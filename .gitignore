@@ -1,0 +1,14 @@
+tmp/
+bin/
+eggs/
+include/
+lib/
+parts/
+downloads/
+var/
+develop-eggs/
+.installed.cfg
+.mr.developer.cfg
+pwd
+wsgi.prof
+*.pyc
