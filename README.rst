@@ -52,7 +52,6 @@ log in as ``admin`` with password ``admin`` to the management interface at
 http://127.0.0.1:6541/manage::
 
   [chrism@oops sdidev]$ bin/supervisord
-  [chrism@oops sdidev]$ bin/populate etc/development.ini
   [chrism@oops sdidev]$ bin/pserve etc/development.ini --reload
 
 Success looks like this::
