@@ -11,6 +11,12 @@ HERE=`dirname $0`
 SLICKGRID=$HERE/../src/slickgrid
 SUBSTANCED=$HERE/../src/substanced/substanced/sdi/static/js
 
+# ... some remarks:
+# -   no, we don't need the whole jquery-ui. We only need the helpers
+#     for column reorder and resize. We will trim the sources at some point.
+# ... (and even these helpers can be omitted, if once we add different support
+#     for column handling.)
+
 cat \
     $SLICKGRID/lib/jquery-ui-1.8.16.custom.min.js \
     $SLICKGRID/lib/jquery.event.drag-2.0.min.js \
