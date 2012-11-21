@@ -9,7 +9,7 @@
 
 HERE=`dirname $0`
 SLICKGRID=$HERE/../src/slickgrid
-SUBSTANCED=$HERE/../src/substanced/substanced/sdi/static/js
+SUBSTANCED=$HERE/../src/substanced/substanced/sdi/static
 
 # ... some remarks:
 # -   no, we don't need the whole jquery-ui. We only need the helpers
@@ -25,11 +25,18 @@ cat \
     $SLICKGRID/slick.core.js \
     $SLICKGRID/slick.grid.js \
     $SLICKGRID/bootstrap/bootstrap-slickgrid.js \
-    $SUBSTANCED/slickgrid-config.js \
-    > $SUBSTANCED/slickgrid.min.js
-
+    $SUBSTANCED/js/slickgrid-config.js \
+    > $SUBSTANCED/js/slickgrid.min.js
 
     #$SLICKGRID/slick.editors.js \
     #$SLICKGRID/plugins/slick.rowselectionmodel.js \
     #$SLICKGRID/controls/slick.columnpicker.js \
+
+# We also need to copy the css files to substanced, because
+# LESS's @import is a real import, consequently it will fail
+# in runtime because the sources will be offline in runtime.
+cat \
+    $SLICKGRID/slick.grid.css \
+    $SLICKGRID/controls/slick.columnpicker.css \
+    > $SUBSTANCED/css/slick.grid.upstream.css
 
