@@ -24,11 +24,12 @@ cat \
     $SLICKGRID/slick.dataview.js \
     $SLICKGRID/slick.core.js \
     $SLICKGRID/slick.grid.js \
+    $SLICKGRID/plugins/slick.rowselectionmodel.js \
+    $SLICKGRID/plugins/slick.checkboxselectcolumn.js \
     $SLICKGRID/bootstrap/bootstrap-slickgrid.js \
     > $SUBSTANCED/js/slickgrid.upstream.js
 
     #$SLICKGRID/slick.editors.js \
-    #$SLICKGRID/plugins/slick.rowselectionmodel.js \
     #$SLICKGRID/controls/slick.columnpicker.js \
 
 # We also need to copy the css files to substanced, because
