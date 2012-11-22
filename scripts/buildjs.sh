@@ -25,8 +25,7 @@ cat \
     $SLICKGRID/slick.core.js \
     $SLICKGRID/slick.grid.js \
     $SLICKGRID/bootstrap/bootstrap-slickgrid.js \
-    $SUBSTANCED/js/slickgrid-config.js \
-    > $SUBSTANCED/js/slickgrid.min.js
+    > $SUBSTANCED/js/slickgrid.upstream.js
 
     #$SLICKGRID/slick.editors.js \
     #$SLICKGRID/plugins/slick.rowselectionmodel.js \
