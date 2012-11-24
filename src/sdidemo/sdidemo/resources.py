@@ -73,21 +73,24 @@ def binder_columns(folder, subobject, request, default_columnspec):
         'field': 'title',
         'value': getattr(subobject, 'title', subobject_name),
         'sortable': True,
+        'formatter': 'icon_label_url',
         },
         {'name': 'Created',
         'field': 'created',
         'value': created,
         'sortable': True,
+        'formatter': 'date',
         },
         {'name': 'Last edited',
         'field': 'modified',
         'value': modified,
         'sortable': True,
+        'formatter': 'date',
         },
         {'name': 'Creator',
         'field': 'creator',
         'value': user_name,
-        'sortable': True
+        'sortable': True,
         }
         ]
 
