@@ -46,4 +46,5 @@ class Document(Persistent):
         self.title = title
         self.body = body
 
-        
+    def after_create(self, inst, registry):
+        pass
