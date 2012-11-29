@@ -109,3 +109,40 @@ def tab_4(context, request):
 def tab_5(context, request):
     return {}
 
+
+# Demonstration of overriding a content registration
+from zope.interface import implementer
+from pyramid.httpexceptions import HTTPFound
+from substanced.interfaces import IFolder
+from substanced.folder import Folder
+from substanced.sdi.views.folder import AddFolderSchema
+
+from substanced.form import FormView
+from substanced.sdi import mgmt_view
+from substanced.sdi.views.folder import AddFolderView
+from substanced.content import content
+
+@content(
+    'Folder',
+    icon='icon-folder-close',
+    add_view='my_add_folder',
+)
+@implementer(IFolder)
+class MyFolder(Folder):
+
+    def send_email(self):
+        pass
+
+@mgmt_view(
+    context=IFolder,
+    name='my_add_folder',
+    tab_condition=False,
+    permission='sdi.add-content',
+    renderer='substanced.sdi:templates/form.pt'
+)
+class MyAddFolderView(AddFolderView):
+
+    def before(self, form):
+        # Perform some custom work before validation
+        pass
+

@@ -18,6 +18,13 @@ def main(global_config, **settings):
     config.include('substanced')
     config.add_catalog_index('title', 'field', 'sdidemo')
     config.add_workflow(workflow, ('Document',))
+
     config.scan()
-    
+    # Let's override the built-in add view
+    from substanced.folder import Folder
+    from .views import MyAddFolderView
+#    config.add_content_type('Folder', Folder,
+#                            add_view='my_add_folder',
+#                            icon='icon-folder-close')
+
     return config.make_wsgi_app()
