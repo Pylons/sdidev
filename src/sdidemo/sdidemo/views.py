@@ -59,36 +59,53 @@ class AddDocumentView(FormView):
         return HTTPFound(
             self.request.mgmt_path(self.context, '@@contents'))
 
-from substanced.sdi import LEFT, RIGHT, MIDDLE
+from substanced.sdi import LEFT, RIGHT
 
-@mgmt_view(name='tab_1', tab_title='Tab 1',
-           renderer='templates/tab_1.pt'
-)
+@mgmt_view(
+    name='tab_1',
+    tab_title='Tab 1',
+    renderer='templates/tab.pt'
+    )
 def tab_1(context, request):
     return {}
 
 
-@mgmt_view(name='tab_2', tab_title='Tab 2',
-           renderer='templates/tab_1.pt',
-           tab_before='tab_1')
+@mgmt_view(
+    name='tab_2',
+    tab_title='Tab 2',
+    renderer='templates/tab.pt',
+    tab_before='tab_1'
+    )
 def tab_2(context, request):
     return {}
 
 
-@mgmt_view(name='tab_3', tab_title='Tab 3',
-           renderer='templates/tab_1.pt', tab_near=RIGHT)
+@mgmt_view(
+    name='tab_3',
+    tab_title='Tab 3',
+    renderer='templates/tab.pt',
+    tab_near=RIGHT
+    )
 def tab_3(context, request):
     return {}
 
 
-@mgmt_view(name='tab_4', tab_title='Tab 4',
-           renderer='templates/tab_1.pt', tab_near=LEFT)
+@mgmt_view(
+    name='tab_4',
+    tab_title='Tab 4',
+    renderer='templates/tab.pt',
+    tab_near=LEFT
+    )
 def tab_4(context, request):
     return {}
 
 
-@mgmt_view(name='tab_5', tab_title='Tab 5',
-           renderer='templates/tab_1.pt', tab_near=LEFT)
+@mgmt_view(
+    name='tab_5',
+    tab_title='Tab 5',
+    renderer='templates/tab.pt',
+    tab_near=LEFT
+    )
 def tab_5(context, request):
     return {}
 
