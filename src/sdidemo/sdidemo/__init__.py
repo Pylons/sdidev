@@ -21,10 +21,12 @@ def main(global_config, **settings):
 
     config.scan()
     # Let's override the built-in add view
-    from substanced.folder import Folder
-    from .views import MyAddFolderView
+#    from substanced.folder import Folder
+#    from .views import MyAddFolderView
 #    config.add_content_type('Folder', Folder,
 #                            add_view='my_add_folder',
 #                            icon='icon-folder-close')
 
+    # Do some evolution
+    config.add_evolution_package('sdidemo.evolution')
     return config.make_wsgi_app()
