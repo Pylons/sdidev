@@ -5,8 +5,10 @@ from substanced.event import (
     subscribe_created,
     subscribe_modified,
     )
-from substanced.catalog import Catalog
-from substanced.util import oid_of
+from substanced.util import (
+    find_service,
+    oid_of,
+    )
 
 from .resources import IDemoContent
 
@@ -26,15 +28,13 @@ def add_sample_content(site, registry):
             doc_name = 'document_%d' % doc_num
             binder[doc_name] = doc
 
-
 @subscribe_created(Root)
 def root_created(event):
-    catalog = Catalog()
-    event.object.add_service('catalog', catalog)
-    catalog.update_indexes('system', reindex=True)
-    catalog.update_indexes('sdidemo', reindex=True)
+    catalogs = find_service(event.object, 'catalogs')
+    catalogs.add_catalog('sdidemo', update_indexes=True)
     add_sample_content(event.object, event.registry)
 
 @subscribe_modified(IDemoContent)
 def content_edited(event):
     event.object.__modified__ = datetime.datetime.utcnow()
+
