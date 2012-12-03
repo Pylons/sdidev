@@ -16,7 +16,7 @@ def main(global_config, **settings):
     """
     config = Configurator(settings=settings, root_factory=root_factory)
     config.include('substanced')
-    config.add_catalog_index('title', 'field', 'sdidemo')
+    config.include('.catalog')
     config.add_workflow(workflow, ('Document',))
 
     config.scan()

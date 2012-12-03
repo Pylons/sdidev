@@ -112,12 +112,8 @@ def tab_5(context, request):
 
 # Demonstration of overriding a content registration
 from zope.interface import implementer
-from pyramid.httpexceptions import HTTPFound
 from substanced.interfaces import IFolder
 from substanced.folder import Folder
-from substanced.sdi.views.folder import AddFolderSchema
-
-from substanced.form import FormView
 from substanced.sdi import mgmt_view
 from substanced.sdi.views.folder import AddFolderView
 from substanced.content import content
