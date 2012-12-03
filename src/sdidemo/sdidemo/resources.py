@@ -35,14 +35,15 @@ class BinderSchema(Schema):
 class DocumentSchema(Schema):
     name = NameSchemaNode(
         editing=context_is_a_document,
-        )
+    )
     title = colander.SchemaNode(
         colander.String(),
-        )
+    )
     body = colander.SchemaNode(
         colander.String(),
         widget=deform.widget.RichTextWidget()
-        )
+    )
+
 
 class DocumentPropertySheet(PropertySheet):
     schema = DocumentSchema()
@@ -116,19 +117,20 @@ class Binder(Folder):
 @content(
     'Document',
     icon='icon-align-left',
-    add_view='add_document', 
-    propertysheets = (
+    add_view='add_document',
+    propertysheets=(
         ('Basic', DocumentPropertySheet),
         ),
     catalog=True,
     )
 @implementer(IDemoContent)
 class Document(Persistent):
-
     name = renamer()
-    
+
     def __init__(self, title, body):
         self.title = title
         self.body = body
 
-        
+    def after_create(self, inst, registry):
+        pass
+
