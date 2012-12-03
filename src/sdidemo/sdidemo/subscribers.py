@@ -1,11 +1,9 @@
 from substanced.root import Root
 from substanced.event import subscribe_created
-from substanced.catalog import Catalog
+from substanced.util import find_service
 
 @subscribe_created(Root)
 def root_created(event):
-    catalog = Catalog()
-    event.object.add_service('catalog', catalog)
-    catalog.update_indexes('system', reindex=True)
-    catalog.update_indexes('sdidemo', reindex=True)
-        
+    catalogs = find_service(event.object, 'catalogs')
+    catalogs.add_catalog('sdidemo', update_indexes=True)
+
