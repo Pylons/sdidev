@@ -14,12 +14,12 @@ from .resources import IDemoContent
 
 def add_sample_content(site, registry):
     admin_user = site['principals']['users']['admin']
-    for binder_num in range(8):
+    for binder_num in range(1):
         binder = registry.content.create('Binder',
             'Binder %d' % binder_num)
         binder_name = 'binder_%d' % binder_num
         site[binder_name] = binder
-        for doc_num in range(2000):
+        for doc_num in range(1000):
             doc = registry.content.create('Document',
                 'Document %d Binder %d' % (doc_num, binder_num),
                 'The quick brown fox jumps over the lazy dog. ' * 50)
