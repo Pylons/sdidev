@@ -12,3 +12,7 @@ develop-eggs/
 pwd
 wsgi.prof
 *.pyc
+*.sw?
+.*.sw?
+src/slickgrid
+.DS_Store
