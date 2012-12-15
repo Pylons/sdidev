@@ -1,6 +1,10 @@
+import random
+import string
+
 from pyramid.httpexceptions import HTTPFound
 from pyramid.renderers import get_renderer
 from pyramid.view import view_config
+from pyramid.response import Response
 
 from substanced.sdi import mgmt_view
 from substanced.form import FormView
@@ -169,3 +173,13 @@ class AddBinderView(FormView):
         self.context[name] = binder
         return HTTPFound(self.request.mgmt_path(self.context, '@@contents'))
 
+@view_config(context=IFolder, name='createsomething')
+def createsomething(context, request):
+    def randchar():
+        return random.choice(
+            string.ascii_uppercase + string.digits
+            )
+    name = ''.join([randchar() for x in range(7)])
+    doc = request.registry.content.create('Document', name, 'BOY!')
+    context.add(name, doc)
+    return Response('OK')
