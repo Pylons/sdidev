@@ -27,6 +27,21 @@ def add_sample_content(site, registry):
             doc.__creator__ = oid_of(admin_user)
             doc_name = 'document_%d' % doc_num
             binder[doc_name] = doc
+    binder = registry.content.create('Binder', 'Ordered Binder')
+    binder_name = 'ordered_binder'
+    site[binder_name] = binder
+    binder_order = []
+    for doc_num in range(20):
+        doc = registry.content.create('Document',
+            'Document %d Binder %d' % (doc_num, binder_num),
+            'The quick brown fox jumps over the lazy dog. ' * 50)
+        doc.__modified__ = doc.__created__
+        doc.__creator__ = oid_of(admin_user)
+        doc_name = 'document_%d' % doc_num
+        binder[doc_name] = doc
+        binder_order.append(doc_name)
+    binder.order = binder_order
+
 
 @subscribe_created(Root)
 def root_created(event):
