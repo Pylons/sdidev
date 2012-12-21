@@ -26,6 +26,7 @@ cat \
     $SLICKGRID/slick.grid.js \
     $SLICKGRID/plugins/slick.rowselectionmodel.js \
     $SLICKGRID/plugins/slick.checkboxselectcolumn.js \
+    $SLICKGRID/plugins/slick.rowmovemanager.js \
     $SLICKGRID/plugins/slick.responsiveness.js \
     $SLICKGRID/bootstrap/bootstrap-slickgrid.js \
     > $SUBSTANCED/js/slickgrid.upstream.js
