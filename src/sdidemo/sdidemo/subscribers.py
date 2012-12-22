@@ -40,7 +40,7 @@ def add_sample_content(site, registry):
         doc_name = 'document_%d' % doc_num
         binder[doc_name] = doc
         binder_order.append(doc_name)
-    binder.order = binder_order
+    binder.set_order(binder_order)
 
 
 @subscribe_created(Root)
