@@ -175,11 +175,14 @@ class AddBinderView(FormView):
 
 @view_config(context=IFolder, name='createsomething')
 def createsomething(context, request):
-    def randchar():
+    def randchar(extra=''):
         return random.choice(
-            string.ascii_uppercase + string.digits
+            string.ascii_uppercase + string.digits + extra
             )
+    def randchar_with_space():
+        return randchar(' ')
     name = ''.join([randchar() for x in range(7)])
-    doc = request.registry.content.create('Document', name, 'BOY!')
+    value = ''.join([randchar_with_space() for x in range(1000)])
+    doc = request.registry.content.create('Document', name, value)
     context.add(name, doc)
     return Response('OK')
