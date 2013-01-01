@@ -13,6 +13,8 @@ from substanced.util import (
 from .resources import IDemoContent
 
 def add_sample_content(site, registry):
+    # Give a site sdi_title
+    site.sdi_title = 'Substance D Demo'
     admin_user = site['principals']['users']['admin']
     for binder_num in range(1):
         binder = registry.content.create('Binder',
