@@ -28,6 +28,15 @@ module.exports = function(grunt) {
             'src/slickgrid/controls/slick.columnpicker.css'
         ]
     };
+    var lessFiles = {
+        'src/substanced/substanced/sdi/static/css/sdi_bootstrap.css': [
+            'src/substanced/substanced/sdi/static/css/sdi_bootstrap.less'
+        ],
+        'src/substanced/substanced/sdi/static/css/sdi_slickgrid.css': [
+            'src/substanced/substanced/sdi/static/css/sdi_slickgrid.less'
+        ]
+    };
+
     // This is silly, but watch requires a flat array format, which we cannot
     // provide via a template expression.
     var allFiles = [];
@@ -35,12 +44,18 @@ module.exports = function(grunt) {
         if (jsFiles.hasOwnProperty(prop)) {
             allFiles = allFiles.concat(jsFiles[prop]);
         }
-    } 
+    }
     for(prop in cssFiles) {
         if (cssFiles.hasOwnProperty(prop)) {
             allFiles = allFiles.concat(cssFiles[prop]);
         }
     }
+    for(prop in lessFiles) {
+        if (lessFiles.hasOwnProperty(prop)) {
+            allFiles = allFiles.concat(lessFiles[prop]);
+        }
+    }
+   
     
     // Project configuration.
     grunt.initConfig({
@@ -64,17 +79,25 @@ module.exports = function(grunt) {
                 files: jsFiles
             }
         },
+        less: {
+            less: {
+                options: {
+                    paths: ['src/substanced/substanced/sdi/static/css']
+                },
+                files: lessFiles
+            }
+        },
         watch: {
             options: {
                 debounceDelay: 250
             },
             'default': {
                 files: allFiles,
-                tasks: ['concat']
+                tasks: ['concat:js', 'concat:css', 'less:less']
             },
             'minify': {
                 files: allFiles,
-                tasks: ['uglify', 'concat:css']
+                tasks: ['uglify:js', 'concat:css', 'less:less']
             }
         }
     });
@@ -83,10 +106,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-less');
 
     // Default task(s).
-    grunt.registerTask('default', ['concat']);
-    grunt.registerTask('minify', ['concat:css', 'uglify']);
+    grunt.registerTask('default', ['concat:js', 'concat:css', 'less']);
+    grunt.registerTask('minify', ['uglify:js', 'concat:css', 'less']);
 
     grunt.registerTask('watch-default', ['watch:default']);
     grunt.registerTask('watch-minify', ['watch:minify']);
