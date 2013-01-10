@@ -31,6 +31,7 @@ cat \
     $SLICKGRID/slick.grid.js \
     $SLICKGRID/plugins/slick.rowselectionmodel.js \
     $SLICKGRID/plugins/slick.checkboxselectcolumn.js \
+    $SLICKGRID/plugins/slick.rowmovemanager.js \
     $SLICKGRID/plugins/slick.responsiveness.js \
     $SLICKGRID/bootstrap/bootstrap-slickgrid.js \
     > $SUBSTANCED/js/slickgrid.upstream.js
@@ -45,6 +46,7 @@ cat \
 # in runtime because the sources will be offline in runtime.
 cat \
     $SLICKGRID/slick.grid.css \
-    $SLICKGRID/controls/slick.columnpicker.css \
     > $SUBSTANCED/css/slick.grid.upstream.css
+
+    #$SLICKGRID/controls/slick.columnpicker.css \
 
