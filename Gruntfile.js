@@ -61,7 +61,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         concat: {
             options: {
-                banner: '/*! <%= pkg.name %> */\n'
+                banner: '/*! Built by <%= pkg.name %> */\n'
             },
             js: {
                 files: jsFiles
