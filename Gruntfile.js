@@ -37,8 +37,7 @@ module.exports = function(grunt) {
         ]
     };
 
-    // This is silly, but watch requires a flat array format, which we cannot
-    // provide via a template expression.
+  
     var allFiles = [];
     for(var prop in jsFiles) {
         if (jsFiles.hasOwnProperty(prop)) {
