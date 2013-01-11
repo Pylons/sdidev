@@ -17,3 +17,6 @@ wsgi.prof
 src/slickgrid
 .DS_Store
 node_modules
+.codeintel
+.coverage
+*.sublime-*
