@@ -79,9 +79,16 @@ module.exports = function(grunt) {
             }
         },
         less: {
-            less: {
+            'default': {
                 options: {
                     paths: ['src/substanced/substanced/sdi/static/css']
+                },
+                files: lessFiles
+            },
+            minify: {
+                options: {
+                    paths: ['src/substanced/substanced/sdi/static/css'],
+                    yuicompress: true
                 },
                 files: lessFiles
             }
@@ -92,11 +99,11 @@ module.exports = function(grunt) {
             },
             'default': {
                 files: allFiles,
-                tasks: ['concat:js', 'concat:css', 'less:less']
+                tasks: ['concat:js', 'concat:css', 'less:default']
             },
-            'minify': {
+            minify: {
                 files: allFiles,
-                tasks: ['uglify:js', 'concat:css', 'less:less']
+                tasks: ['uglify:js', 'concat:css', 'less:minify']
             }
         }
     });
@@ -108,8 +115,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
 
     // Default task(s).
-    grunt.registerTask('default', ['concat:js', 'concat:css', 'less']);
-    grunt.registerTask('minify', ['uglify:js', 'concat:css', 'less']);
+    grunt.registerTask('default', ['concat:js', 'concat:css', 'less:default']);
+    grunt.registerTask('minify', ['uglify:js', 'concat:css', 'less:minify']);
 
     grunt.registerTask('watch-default', ['watch:default']);
     grunt.registerTask('watch-minify', ['watch:minify']);
