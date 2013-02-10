@@ -16,3 +16,4 @@ wsgi.prof
 .*.sw?
 src/slickgrid
 .DS_Store
+.codeintel
