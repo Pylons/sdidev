@@ -32,16 +32,39 @@ def splash_view(request):
 #
 #   "Retail" view for documents.
 #
+
+import colander
+import deform
+class Person(colander.Schema):
+    name = colander.SchemaNode(colander.String())
+    age = colander.SchemaNode(colander.Integer(),
+                              validator=colander.Range(0,200))
+class People(colander.SequenceSchema):
+    person = Person()
+class Schema(colander.Schema):
+    people = People(
+        widget=deform.widget.SequenceWidget(orderable=True)
+    )
+
+
+
+
+#
+#   "Retail" view for documents.
+#
 @view_config(
     context=Document,
     renderer='templates/document.pt',
-)
+    )
 def document_view(context, request):
     return {'title': context.title,
             'body': context.body,
             'master': get_renderer(
                 'templates/master.pt').implementation(),
-    }
+            }
+
+
+
 
 #
 #   SDI "add" view for documents
@@ -68,6 +91,20 @@ class AddDocumentView(FormView):
         self.context[name] = document
         return HTTPFound(
             self.request.mgmt_path(self.context, '@@contents'))
+
+
+@mgmt_view(
+    context=IFolder,
+    name='paulie',
+    tab_title='Add Document',
+    permission='sdi.add-content',
+    renderer='substanced.sdi:templates/form.pt',
+    tab_condition=False,
+)
+class PaulieView(FormView):
+    title = 'Paulie Form'
+    schema = Schema()
+    buttons = ('add',)
 
 #from substanced.sdi import LEFT, RIGHT
 #
