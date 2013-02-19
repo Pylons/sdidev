@@ -20,3 +20,5 @@ src/slickgrid
 .coverage
 *.sublime-*
 node_modules
+grunt
+jam_modules

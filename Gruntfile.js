@@ -99,13 +99,26 @@ module.exports = function(grunt) {
             },
             'default': {
                 files: allFiles,
-                tasks: ['concat:js', 'concat:css', 'less:default']
+                tasks: [/*'concat:js', 'concat:css',*/ 'less:default']
             },
             minify: {
                 files: allFiles,
-                tasks: ['uglify:js', 'concat:css', 'less:minify']
+                tasks: ['uglify:js', /*'concat:css',*/ 'less:minify']
             }
         }
+        /*
+        jam: {
+            'default': {
+                dest: 'compiled.js',
+                options: {
+                    //package_dir: 'jam_modules',
+                    verbose: true,
+                    nominify: true,
+                    wrap: true
+                }
+            }
+        }
+        */
     });
 
     // Load the plugin that provides the "uglify" task.
@@ -113,10 +126,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-less');
+    //grunt.loadNpmTasks('grunt-jam');
 
     // Default task(s).
-    grunt.registerTask('default', ['concat:js', 'concat:css', 'less:default']);
-    grunt.registerTask('minify', ['uglify:js', 'concat:css', 'less:minify']);
+    grunt.registerTask('default', [/*'concat:js', 'concat:css',*/ 'less:default']);
+    grunt.registerTask('minify', ['uglify:js', /*'concat:css',*/ 'less:minify']);
 
     grunt.registerTask('watch-default', ['watch:default']);
     grunt.registerTask('watch-minify', ['watch:minify']);
