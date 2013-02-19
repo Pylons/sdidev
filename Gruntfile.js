@@ -105,20 +105,15 @@ module.exports = function(grunt) {
                 files: allFiles,
                 tasks: ['uglify:js', /*'concat:css',*/ 'less:minify']
             }
-        }
-        /*
-        jam: {
+        },
+        bower: {
             'default': {
-                dest: 'compiled.js',
+                dest: 'compiled',
                 options: {
-                    //package_dir: 'jam_modules',
-                    verbose: true,
-                    nominify: true,
-                    wrap: true
+                    //basePath: 'components/'
                 }
             }
         }
-        */
     });
 
     // Load the plugin that provides the "uglify" task.
@@ -126,7 +121,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-less');
-    //grunt.loadNpmTasks('grunt-jam');
+    grunt.loadNpmTasks('grunt-bower-task');
 
     // Default task(s).
     grunt.registerTask('default', [/*'concat:js', 'concat:css',*/ 'less:default']);

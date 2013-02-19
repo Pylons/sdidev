@@ -11,7 +11,7 @@
         "grunt-contrib-concat": "~0.1.1",
         "grunt-contrib-less": "~0.3.2",
         "grunt-contrib-watch": "~0.1.4",
-        "grunt-bower": "*", 
+        "grunt-bower-task": "*", 
         "bower": "*"
     }
 }
