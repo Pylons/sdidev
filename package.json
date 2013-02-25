@@ -4,14 +4,14 @@
     "name": "sdidev-resources",
     "version": "0.1.0",
     "devDependencies": {
-        "grunt": "0.4.0rc4",
+        "yo": "*",
         "grunt-cli": "~0.1.6",
-        "grunt-contrib-jshint": "~0.1.0",
-        "grunt-contrib-uglify": "~0.1.0",
-        "grunt-contrib-concat": "~0.1.1",
-        "grunt-contrib-less": "~0.3.2",
-        "grunt-contrib-watch": "~0.1.4",
-        "grunt-bower-task": "*", 
-        "bower": "*"
+        "bower": "*",
+        "grunt": "~0.4.0rc4",
+        "grunt-contrib-jshint": "*",
+        "grunt-contrib-uglify": "*",
+        "grunt-contrib-concat": "*",
+        "grunt-contrib-less": "*",
+        "grunt-contrib-watch": "*"
     }
 }
