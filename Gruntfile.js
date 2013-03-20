@@ -2,7 +2,7 @@
 
 module.exports = function(grunt) {
 
-  
+
   var jsFiles = {
     'src/substanced/substanced/sdi/static/js/slickgrid.upstream.js': [
       'src/slickgrid/plugins/slick.responsiveness.js',
@@ -38,7 +38,8 @@ module.exports = function(grunt) {
     ]
   };
 
-  
+
+  // provide a flat listing of source files for watch
   var allFiles = [];
   for(var prop in jsFiles) {
     if (jsFiles.hasOwnProperty(prop)) {
@@ -55,8 +56,8 @@ module.exports = function(grunt) {
       allFiles = allFiles.concat(lessFiles[prop]);
     }
   }
-   
-  
+
+
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -107,7 +108,6 @@ module.exports = function(grunt) {
         tasks: ['uglify:js', 'concat:css', 'less:minify']
       }
     }
-   
   });
 
   // Load the task plugins.
@@ -115,23 +115,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-less');
-
-  grunt.registerTask('bowermap', 'Build bower map.', function() {
-    var task = this;
-    var done = this.async();
-    require('bower').commands.list({paths: true})
-      .on('data', function (data) {
-        global.bowerMap = data;
-        grunt.log.writeln('Bower source map produced, available modules: ' + Object.keys(data).join(', '));
-        done();
-      })
-      .on('error', function (err) {
-        grunt.warn(err.message);
-        done();
-      });
-  });
-
-
 
 
   // Default task(s).
@@ -141,6 +124,5 @@ module.exports = function(grunt) {
   grunt.registerTask('watch-default', ['watch:default']);
   grunt.registerTask('watch-minify', ['watch:minify']);
 
-  console.log(global.bowerMap);
 
 };
