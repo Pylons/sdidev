@@ -6,6 +6,7 @@
         "jquery-ui": ">=1.8 <2",
         "bootstrap": "==2.2.2",
         "slickgrid": ">=2.0 <3",
-        "slickgrid-bootstrap": "git@github.com:reebalazs/SlickGrid-bootstrap.git"
+        "slickgrid-bootstrap": "git@github.com:reebalazs/SlickGrid-bootstrap.git",
+        "slickgrid-plugin-rowmovemanager": "git@github.com:reebalazs/SlickGrid-plugin-rowmovemanager.git"
     }
 }

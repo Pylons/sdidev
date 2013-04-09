@@ -11,6 +11,7 @@
         ["bower", "slickgrid", "slick.dataview.js"],
         ["bower", "slickgrid", "plugins/slick.checkboxselectcolumn.js"],
         ["bower", "slickgrid", "plugins/slick.rowselectionmodel.js"],
+        ["bower", "slickgrid-plugin-rowmovemanager", "plugins/slick.rowmovemanager.js"],
         ["bower", "slickgrid-bootstrap", "plugins/slick.responsiveness.js"],
         ["bower", "slickgrid-bootstrap", "bootstrap/bootstrap-slickgrid.js"]
     ],
