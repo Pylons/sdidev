@@ -21,3 +21,4 @@ src/slickgrid
 *.sublime-*
 node_modules
 components
+.Python
