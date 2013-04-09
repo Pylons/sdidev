@@ -1,5 +1,3 @@
-
-
 {
     "name": "sdidev-resources",
     "version": "0.1.0",
@@ -9,10 +7,12 @@
         "bower": "*",
         "grunt": ">=0.4",
         "grunt-contrib-jshint": "*",
+        "grunt-contrib-copy": "*",
         "grunt-contrib-uglify": "*",
         "grunt-contrib-concat": "*",
         "grunt-contrib-less": "*",
         "grunt-contrib-watch": "*",
-        "grunt-collection-helper": "git://github.com/reebalazs/grunt-collection-helper.git"
+        "grunt-collection-helper": "git://github.com/reebalazs/grunt-collection-helper.git",
+        "buster": "*"
     }
 }
