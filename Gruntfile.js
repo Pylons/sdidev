@@ -49,7 +49,7 @@ module.exports = function(grunt) {
           paths: ['src/substanced/substanced/sdi/static/css']
         },
         files: {
-          'src/substanced/substanced/sdi/static/css/sdi_bootstrap.css':
+          'src/substanced/substanced/sdi/static/dist/sdi_bootstrap.css':
             collect.select('sdi_bootstrap.css')
         }
       },
@@ -59,7 +59,7 @@ module.exports = function(grunt) {
           yuicompress: true
         },
         files: {
-          'src/substanced/substanced/sdi/static/css/sdi_bootstrap.css':
+          'src/substanced/substanced/sdi/static/dist/sdi_bootstrap.css':
             collect.select('sdi_bootstrap.css')
         }
       }
