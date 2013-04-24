@@ -14,7 +14,10 @@ from substanced.schema import (
     Schema,
     NameSchemaNode
     )
-from substanced.util import renamer
+from substanced.util import (
+    renamer,
+    find_catalog,
+    )
 from substanced.folder import Folder
 from substanced.objectmap import find_objectmap
 
@@ -54,6 +57,10 @@ class BinderPropertySheet(PropertySheet):
 class IDemoContent(Interface):
     pass
 
+def find_index(context, catalog_name, index_name):
+    catalog = find_catalog(context, catalog_name)
+    return catalog[index_name]
+
 def binder_columns(folder, subobject, request, default_columnspec):
     subobject_name = getattr(subobject, '__name__', str(subobject))
     objectmap = find_objectmap(folder)
@@ -69,29 +76,32 @@ def binder_columns(folder, subobject, request, default_columnspec):
         created = created.isoformat()
     if modified is not None:
         modified = modified.isoformat()
+
+    def make_sorter(index_name):
+        def sorter(folder, resultset, limit=None, reverse=False):
+            index = find_index(folder, 'sdidemo', index_name)
+            if index is None:
+                return resultset
+            return resultset.sort(index, limit=limit, reverse=reverse)
+        return sorter
+
     return default_columnspec + [
         {'name': 'Title',
-        'field': 'title',
         'value': getattr(subobject, 'title', subobject_name),
-        'sortable': True,
-        'formatter': 'icon_label_url',
+        'sorter': make_sorter('title'),
         },
-        {'name': 'Created',
-        'field': 'created',
+        {'name': 'Creation Date',
         'value': created,
-        'sortable': True,
+        'sorter':make_sorter('created'),
         'formatter': 'date',
         },
-        {'name': 'Last edited',
-        'field': 'modified',
+        {'name': 'Modified Date',
         'value': modified,
-        'sortable': True,
+        'sorter':make_sorter('modified'),
         'formatter': 'date',
         },
         {'name': 'Creator',
-        'field': 'creator',
         'value': user_name,
-        'sortable': True,
         }
         ]
 
