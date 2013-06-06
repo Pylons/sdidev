@@ -25,7 +25,6 @@ def add_sample_content(site, registry):
             doc = registry.content.create('Document',
                 'Document %d Binder %d' % (doc_num, binder_num),
                 'The quick brown fox jumps over the lazy dog. ' * 50)
-            doc.__modified__ = doc.__created__
             doc.__creator__ = oid_of(admin_user)
             doc_name = 'document_%d' % doc_num
             binder[doc_name] = doc
@@ -37,7 +36,6 @@ def add_sample_content(site, registry):
         doc = registry.content.create('Document',
             'Document %d Binder %d' % (doc_num, binder_num),
             'The quick brown fox jumps over the lazy dog. ' * 50)
-        doc.__modified__ = doc.__created__
         doc.__creator__ = oid_of(admin_user)
         doc_name = 'document_%d' % doc_num
         binder[doc_name] = doc
