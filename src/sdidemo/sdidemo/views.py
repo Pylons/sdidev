@@ -218,8 +218,9 @@ def createsomething(context, request):
             )
     def randchar_with_space():
         return randchar(' ')
-    name = ''.join([randchar() for x in range(7)])
-    value = ''.join([randchar_with_space() for x in range(1000)])
-    doc = request.registry.content.create('Document', name, value)
-    context.add(name, doc)
+    for i in range(100):
+        name = ''.join([randchar() for x in range(7)])
+        value = ''.join([randchar_with_space() for x in range(1000)])
+        doc = request.registry.content.create('Document', name, value)
+        context.add(name, doc)
     return Response('OK')
