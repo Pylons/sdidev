@@ -17,6 +17,7 @@ def main(global_config, **settings):
     config = Configurator(settings=settings, root_factory=root_factory)
     config.include('substanced')
     config.include('.catalog')
+    config.include('.evolution')
     config.add_workflow(workflow, ('Document',))
 
     config.scan()
@@ -27,6 +28,4 @@ def main(global_config, **settings):
 #                            add_view='my_add_folder',
 #                            icon='icon-folder-close')
 
-    # Do some evolution
-    config.add_evolution_package('sdidemo.evolution')
     return config.make_wsgi_app()
