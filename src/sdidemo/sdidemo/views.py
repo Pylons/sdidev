@@ -231,11 +231,13 @@ def createsomething(context, request):
 def eventstream(request):
     response = request.response
     response.content_type = 'text/event-stream'
+    last_event_id = request.headers.get('Last-Event-Id')
     t = time.time()
     msg = os.urandom(100).decode(
         'ascii', 'ignore').encode('base64').decode('ascii')[:-3]
     response.text += u'id: %s\n\n' % t
-    response.text += u'data: %s\n\n' % msg
+    response.text += u'data: %s' % msg
+    response.text += u' (last event id %s)\n\n' % last_event_id
     return response
 
 @view_config(name='events', renderer='templates/events.pt')
