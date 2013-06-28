@@ -1,5 +1,7 @@
+import os
 import random
 import string
+import time
 
 from pyramid.httpexceptions import HTTPFound
 from pyramid.renderers import get_renderer
@@ -224,3 +226,18 @@ def createsomething(context, request):
         doc = request.registry.content.create('Document', name, value)
         context.add(name, doc)
     return Response('OK')
+
+@view_config(name='eventstream', http_cache=0)
+def eventstream(request):
+    response = request.response
+    response.content_type = 'text/event-stream'
+    t = time.time()
+    msg = os.urandom(100).decode(
+        'ascii', 'ignore').encode('base64').decode('ascii')[:-3]
+    response.text += u'id: %s\n\n' % t
+    response.text += u'data: %s\n\n' % msg
+    return response
+
+@view_config(name='events', renderer='templates/events.pt')
+def events(request):
+    return {}
