@@ -1,4 +1,3 @@
-import os
 import random
 import string
 import time
@@ -89,7 +88,6 @@ class AddDocumentView(FormView):
         name = appstruct.pop('name')
         document = registry.content.create('Document', **appstruct)
         document.__creator__ = oid_of(self.request.user)
-        document.__modified__ = document.__created__
         self.context[name] = document
         return HTTPFound(
             self.request.mgmt_path(self.context, '@@contents'))
@@ -208,7 +206,6 @@ class AddBinderView(FormView):
         name = appstruct.pop('name')
         binder = registry.content.create('Binder', **appstruct)
         binder.__creator__ = oid_of(self.request.user)
-        binder.__modified__ = binder.__created__
         self.context[name] = binder
         return HTTPFound(self.request.mgmt_path(self.context, '@@contents'))
 
@@ -227,3 +224,12 @@ def createsomething(context, request):
         context.add(name, doc)
     return Response('OK')
 
+@view_config(name='btest')
+def btest(context, request):
+    from substanced.audit import AuditScribe
+    t = time.time()
+    auditscribe = AuditScribe(context)
+    auditscribe.add('foo', None, a=t)
+    response = request.response
+    response.body = 'OK'
+    return response
