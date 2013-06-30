@@ -232,4 +232,5 @@ def btest(context, request):
     auditscribe.add('foo', None, a=t)
     response = request.response
     response.body = 'OK'
+    response.content_type = 'text/plain'
     return response
