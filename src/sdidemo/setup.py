@@ -37,6 +37,8 @@ setup(name='sdidemo',
       entry_points = """\
       [paste.app_factory]
       main = sdidemo:main
+      [console_scripts]
+      qpwrapper = sdidemo.scripts.qpwrapper:main
       """,
       )
 
