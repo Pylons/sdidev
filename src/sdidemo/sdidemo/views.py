@@ -2,6 +2,9 @@ import random
 import string
 import time
 
+import colander
+import deform
+
 from pyramid.httpexceptions import HTTPFound
 from pyramid.renderers import get_renderer
 from pyramid.view import view_config
@@ -29,26 +32,6 @@ def splash_view(request):
         'substanced.manage_prefix',
         '/manage')
     return {'manage_prefix': manage_prefix}
-
-#
-#   "Retail" view for documents.
-#
-
-import colander
-import deform
-class Person(colander.Schema):
-    name = colander.SchemaNode(colander.String())
-    age = colander.SchemaNode(colander.Integer(),
-                              validator=colander.Range(0,200))
-class People(colander.SequenceSchema):
-    person = Person()
-class Schema(colander.Schema):
-    people = People(
-        widget=deform.widget.SequenceWidget(orderable=True)
-    )
-
-
-
 
 #
 #   "Retail" view for documents.
@@ -92,6 +75,17 @@ class AddDocumentView(FormView):
         return HTTPFound(
             self.request.mgmt_path(self.context, '@@contents'))
 
+
+class Person(colander.Schema):
+    name = colander.SchemaNode(colander.String())
+    age = colander.SchemaNode(colander.Integer(),
+                              validator=colander.Range(0,200))
+class People(colander.SequenceSchema):
+    person = Person()
+class Schema(colander.Schema):
+    people = People(
+        widget=deform.widget.SequenceWidget(orderable=True)
+    )
 
 @mgmt_view(
     context=IFolder,

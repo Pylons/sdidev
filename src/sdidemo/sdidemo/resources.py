@@ -108,7 +108,6 @@ def binder_columns(folder, subobject, request, default_columnspec):
         ('Basic', BinderPropertySheet),
         ),
     columns=binder_columns,
-    catalog=True,
     )
 @implementer(IDemoContent)
 class Binder(Folder):
@@ -126,7 +125,6 @@ class Binder(Folder):
     propertysheets=(
         ('Basic', DocumentPropertySheet),
         ),
-    catalog=True,
     )
 @implementer(IDemoContent)
 class Document(Persistent):
