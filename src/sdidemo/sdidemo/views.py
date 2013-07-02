@@ -13,7 +13,10 @@ from pyramid.response import Response
 from substanced.sdi import mgmt_view
 from substanced.form import FormView
 from substanced.interfaces import IFolder
-from substanced.util import oid_of
+from substanced.util import (
+    oid_of,
+    find_catalog,
+    )
 
 from .resources import (
     Document,
@@ -228,3 +231,17 @@ def btest(context, request):
     response.body = 'OK'
     response.content_type = 'text/plain'
     return response
+
+@view_config(name='ctest')
+def ctest(context, request):
+    demo_catalog = find_catalog(context, 'sdidemo')
+    system_catalog = find_catalog(context, 'system')
+    q = ( demo_catalog['title'].eq('fred') &
+          system_catalog['content_type'].eq('Document') )
+    resultset = q.execute().all()
+    request.response.content_type = 'text/plain'
+    request.response.body = str(list(resultset))
+    return request.response
+    
+    
+    

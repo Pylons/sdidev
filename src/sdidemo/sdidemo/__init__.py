@@ -8,8 +8,15 @@ workflow = Workflow(initial_state="draft", type="document")
 
 workflow.add_state("draft")
 workflow.add_state("published")
-workflow.add_transition('to_publish', from_state='draft', to_state='published')
-workflow.add_transition('to_draft', from_state='published', to_state='draft')
+workflow.add_state("rejected")
+
+workflow.add_transition('publish', from_state='draft', to_state='published')
+workflow.add_transition('unpublish', from_state='published', to_state='draft')
+workflow.add_transition(
+    'reject_published', from_state='published', to_state='rejected')
+workflow.add_transition(
+    'reject_draft', from_state='draft', to_state='rejected')
+workflow.add_transition('unreject', from_state='rejected', to_state='draft')
 
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
