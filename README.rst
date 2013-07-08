@@ -19,10 +19,12 @@ Download virtualenv from http://pypi.python.org/pypi/virtualenv and install
 it into your system Python (2.7+).  Once you've installed it, create a
 virtualenv like so::
 
-  $ $PYTHONHOME/bin/virtualenv .
+  $ $PYTHONHOME/bin/virtualenv --no-setuptools .
 
 Where $PYTHONHOME/bin is where your Python installation installs its scripts.
-This will create a virtualenv within the ``sdidev`` directory.
+This will create a virtualenv within the ``sdidev`` directory. The
+--no-setuptools flag is important to make sure that buildout can use its
+preferred version of setuptools instead of whatever your system Python has.
 
 After you've succesfully done the above, invoke the buildout via::
 
