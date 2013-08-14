@@ -161,6 +161,21 @@ from substanced.folder import Folder
 from substanced.sdi import mgmt_view
 from substanced.sdi.views.folder import AddFolderView
 from substanced.content import content
+from substanced.sdi.views.folder import folder_contents_views, FolderContents
+
+#@folder_contents_views()
+#class MyFolderView(FolderContents):
+#    def get_options(self):
+#
+#        return dict(
+#            editable=False,
+#            enableAddRow=False,
+#            enableCellNavigation=True,
+#            asyncEditorLoading=True,
+#            forceFitColumns=True,
+#            rowHeight=85,
+#            )
+
 
 @content(
     'Folder',
