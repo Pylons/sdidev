@@ -20,3 +20,4 @@ src/slickgrid
 .codeintel
 *.sublime-project
 *.sublime-workspace
+.Python
