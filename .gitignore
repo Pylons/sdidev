@@ -21,3 +21,5 @@ src/slickgrid
 *.sublime-project
 *.sublime-workspace
 .Python
+*.profile
+npm-debug.log
