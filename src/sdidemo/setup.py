@@ -12,6 +12,7 @@ requires = [
     'waitress',
     'substanced',
     'pyramid_tm',
+    'deformdemo',
     ]
 
 setup(name='sdidemo',

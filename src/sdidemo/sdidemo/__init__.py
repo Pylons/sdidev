@@ -28,11 +28,20 @@ def main(global_config, **settings):
     config.add_workflow(workflow, ('Document',))
 
     config.scan()
-    # Let's override the built-in add view
-#    from substanced.folder import Folder
-#    from .views import MyAddFolderView
-#    config.add_content_type('Folder', Folder,
-#                            add_view='my_add_folder',
-#                            icon='icon-folder-close')
-
+    # paster serve entry point
+    settings['debug_templates'] = 'true'
+    renderer = settings['deformdemo.renderer']
+    renderer = config.maybe_dotted(renderer)
+    import deform
+    deform.Form.set_default_renderer(renderer)
+    config.add_route('deformdemo', '/deformdemo*traverse')
+    config.add_static_view('static_demo', 'deformdemo:static')
+    config.add_translation_dirs(
+        'colander:locale',
+        'deform:locale',
+        'deformdemo:locale'
+        )
+    def onerror(*arg):
+        pass
+    config.scan('deformdemo', onerror=onerror)
     return config.make_wsgi_app()
