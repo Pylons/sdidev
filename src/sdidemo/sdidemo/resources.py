@@ -27,6 +27,14 @@ def context_is_a_binder(context, request):
 def context_is_a_document(context, request):
     return request.registry.content.istype(context, 'Document')
 
+class SomeMappingSchema(Schema):
+    foo = colander.SchemaNode(
+        colander.String()
+        )
+    bar = colander.SchemaNode(
+        colander.String()
+        )
+
 class BinderSchema(Schema):
     name = NameSchemaNode(
         editing=context_is_a_binder,
@@ -34,6 +42,7 @@ class BinderSchema(Schema):
     title = colander.SchemaNode(
         colander.String(),
         )
+    submapping = SomeMappingSchema()
 
 class DocumentSchema(Schema):
     name = NameSchemaNode(
@@ -100,12 +109,16 @@ def binder_columns(folder, subobject, request, default_columnspec):
         }
         ]
 
+class AnotherPropertySheet(PropertySheet):
+    schema = BinderSchema()
+
 @content(
     'Binder',
-    icon='icon-book',
+    icon='glyphicon glyphicon-book',
     add_view='add_binder',
     propertysheets = (
         ('Basic', BinderPropertySheet),
+        ('Another', AnotherPropertySheet),
         ),
     columns=binder_columns,
     )
@@ -120,7 +133,7 @@ class Binder(Folder):
 
 @content(
     'Document',
-    icon='icon-align-left',
+    icon='glyphicon glyphicon-align-left',
     add_view='add_document',
     propertysheets=(
         ('Basic', DocumentPropertySheet),

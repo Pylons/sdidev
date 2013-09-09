@@ -179,7 +179,7 @@ from substanced.sdi.views.folder import folder_contents_views, FolderContents
 
 @content(
     'Folder',
-    icon='icon-folder-close',
+    icon='glyphicon glyphicon-folder-close',
     add_view='my_add_folder',
 )
 @implementer(IFolder)
