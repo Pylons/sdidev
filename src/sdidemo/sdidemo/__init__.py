@@ -30,10 +30,6 @@ def main(global_config, **settings):
     config.scan()
     # paster serve entry point
     settings['debug_templates'] = 'true'
-    renderer = settings['deformdemo.renderer']
-    renderer = config.maybe_dotted(renderer)
-    import deform
-    deform.Form.set_default_renderer(renderer)
     config.add_route('deformdemo', '/deformdemo*traverse')
     config.add_static_view('static_demo', 'deformdemo:static')
     config.add_translation_dirs(
