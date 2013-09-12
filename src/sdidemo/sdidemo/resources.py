@@ -10,14 +10,16 @@ from zope.interface import (
 
 from substanced.content import content
 from substanced.property import PropertySheet
+from substanced.objectmap import multireference_sourceid_property
 from substanced.schema import (
     Schema,
-    NameSchemaNode
+    NameSchemaNode,
     )
 from substanced.util import (
     renamer,
     find_catalog,
     )
+from substanced.interfaces import ReferenceType
 from substanced.folder import Folder
 from substanced.objectmap import find_objectmap
 
@@ -35,6 +37,27 @@ class SomeMappingSchema(Schema):
         colander.String()
         )
 
+@colander.deferred
+def deferred_objectrefs(node, kw):
+    context = kw['context']
+    L = []
+    maximum = 50
+    current = 0
+    for name, obj in context.items():
+        oid = obj.__oid__
+        L.append((oid, name))
+        current+=1
+        if current >= maximum:
+            break
+    return deform.widget.Select2Widget(values=L)
+
+class ReferenceSequence(colander.SequenceSchema):
+    refid = colander.SchemaNode(
+        colander.Int(),
+        widget=deferred_objectrefs,
+        preparer=int,
+        )
+
 class BinderSchema(Schema):
     name = NameSchemaNode(
         editing=context_is_a_binder,
@@ -43,6 +66,9 @@ class BinderSchema(Schema):
         colander.String(),
         )
     submapping = SomeMappingSchema()
+    related = ReferenceSequence(
+        widget = deform.widget.SequenceWidget(orderable=True)
+        )
 
 class DocumentSchema(Schema):
     name = NameSchemaNode(
@@ -62,6 +88,13 @@ class DocumentPropertySheet(PropertySheet):
 
 class BinderPropertySheet(PropertySheet):
     schema = BinderSchema()
+    def get(self):
+        result = PropertySheet.get(self)
+        return result
+        
+    def set(self, appstruct):
+        result = PropertySheet.set(self, appstruct)
+        return result
     
 class IDemoContent(Interface):
     pass
@@ -112,6 +145,10 @@ def binder_columns(folder, subobject, request, default_columnspec):
 class AnotherPropertySheet(PropertySheet):
     schema = BinderSchema()
 
+class BinderToRelated(ReferenceType):
+    pass
+    
+
 @content(
     'Binder',
     icon='glyphicon glyphicon-book',
@@ -126,6 +163,7 @@ class AnotherPropertySheet(PropertySheet):
 class Binder(Folder):
 
     name = renamer()
+    related = multireference_sourceid_property(BinderToRelated, ordered=True)
     
     def __init__(self, title):
         super(Binder, self).__init__()
