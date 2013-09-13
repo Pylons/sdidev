@@ -21,7 +21,7 @@
   <div metal:fill-slot="main">
     <h1>Substance D management interface demo</h1>
 
-    <p><a href="https://github.com/Pylons/substanced">Substance D</a> is an
+    <p><a href="http://substanced.net">Substance D</a> is an
     application development environment built using the <a
     href="http://pylonsproject.org">Pyramid</a> web framework.  It owes much
     of its spirit to the <a href="http://www.zope.org">Zope 2</a> web
