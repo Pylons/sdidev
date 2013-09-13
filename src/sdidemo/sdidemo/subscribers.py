@@ -1,4 +1,5 @@
 import datetime
+from pyramid.compat import is_nonstr_iter
 
 from substanced.root import Root
 from substanced.event import (
@@ -16,6 +17,33 @@ def add_sample_content(site, registry):
     # Give a site sdi_title
     site.sdi_title = 'Substance D Demo'
     admin_user = site['principals']['users']['admin']
+    admin_oid = admin_user.__oid__
+    oldacl = admin_user.__acl__
+    newacl = []
+
+    # disallow password changing for admin user (for demo)
+    for (action, oid, permissions) in oldacl:
+        if oid == admin_oid and action == 'Allow':
+            if not is_nonstr_iter(permissions):
+                permissions = (permissions,)
+            permissions = set(permissions)
+            if 'sdi.change-password' in permissions:
+                permissions.remove('sdi.change-password')
+                permissions = tuple(permissions)
+        newacl.append((action, oid, permissions))
+
+    if newacl != oldacl:
+        admin_user.__acl__ = newacl
+
+    site.__acl__.insert(
+        0,
+        ('Deny', admin_oid, ('sdi.change-password',))
+        )
+    site.__acl__.insert(
+        0,
+        ('Deny', admin_oid, ('sdi.manage-user-groups',))
+        )
+    
     for binder_num in range(1):
         binder = registry.content.create('Binder',
             'Binder %d' % binder_num)

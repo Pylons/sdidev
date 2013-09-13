@@ -57,4 +57,10 @@ def main(global_config, **settings):
         tab_condition=False,
         permission=NO_PERMISSION_REQUIRED
         )
+    try:
+        import sddav
+    except ImportError:
+        pass
+    else:
+        config.include('sddav')
     return config.make_wsgi_app()
