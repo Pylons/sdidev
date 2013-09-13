@@ -13,6 +13,7 @@ requires = [
     'substanced',
     'pyramid_tm',
     'deformdemo',
+    'pyramid_multiauth',
     ]
 
 setup(name='sdidemo',

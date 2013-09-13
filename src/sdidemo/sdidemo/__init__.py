@@ -1,9 +1,12 @@
 from pyramid.config import Configurator
 from pyramid.security import NO_PERMISSION_REQUIRED
 from pyramid.httpexceptions import HTTPForbidden
+from pyramid_multiauth import MultiAuthenticationPolicy
+from pyramid.authentication import AuthTktAuthenticationPolicy
 
 from substanced import root_factory
 from substanced.sdi.views.login import login
+from substanced.principal import groupfinder
 
 from substanced.workflow import Workflow
 
@@ -58,7 +61,14 @@ def main(global_config, **settings):
         permission=NO_PERMISSION_REQUIRED
         )
     try:
-        import sddav
+        from sddav.authentication import SDIBasicAuthPolicy
+        # set up the basic auth policy if we have sddav
+        secret = settings['substanced.secret']
+        authn_policy = MultiAuthenticationPolicy([
+            AuthTktAuthenticationPolicy(secret, callback=groupfinder),
+            SDIBasicAuthPolicy(),
+            ])
+        config.set_authentication_policy(authn_policy)
     except ImportError:
         pass
     else:
