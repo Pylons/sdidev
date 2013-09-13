@@ -1,6 +1,9 @@
 from pyramid.config import Configurator
+from pyramid.security import NO_PERMISSION_REQUIRED
+from pyramid.httpexceptions import HTTPForbidden
 
 from substanced import root_factory
+from substanced.sdi.views.login import login
 
 from substanced.workflow import Workflow
 
@@ -40,4 +43,18 @@ def main(global_config, **settings):
     def onerror(*arg):
         pass
     config.scan('deformdemo', onerror=onerror)
+    # override login page to show login info
+    config.add_mgmt_view(
+        login,
+        name='login',
+        renderer='sdidemo:templates/login.pt',
+        tab_condition=False,
+        permission=NO_PERMISSION_REQUIRED)
+    config.add_mgmt_view(
+        login,
+        context=HTTPForbidden,
+        renderer='sdidemo:templates/login.pt',
+        tab_condition=False,
+        permission=NO_PERMISSION_REQUIRED
+        )
     return config.make_wsgi_app()
