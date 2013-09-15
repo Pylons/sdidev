@@ -29,6 +29,7 @@ preferred version of setuptools instead of whatever your system Python has.
 After you've succesfully done the above, invoke the buildout via::
 
   $ bin/python bootstrap.py
+  $ ln -s buildout-withoutaddons.cfg buildout.cfg
   $ bin/buildout -U
 
 .. warning:: The ``-U`` flag above is *very important*.  It specifies
