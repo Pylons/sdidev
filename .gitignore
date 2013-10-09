@@ -23,4 +23,3 @@ src/slickgrid
 .Python
 *.profile
 npm-debug.log
-buildout.cfg
