@@ -83,6 +83,15 @@ for import.
 
 Log files, pid files, and database files are stored in the ``var`` directory.
 
+Installing Sublime codeintel
+----------------------------
+
+The buildout has a section for setting up Sublime codeintel, but it's not 
+enabled by default because the recipe used is not Python 3 compatible. If you
+are using Python 2.7 and want to enable it, just edit the buildout.cfg file
+and add ``codeintel`` to the parts section. This must be done *before* running
+the buildout.
+
 Installing Node and LESS
 ------------------------
 
