@@ -13,7 +13,10 @@ class IndexViews:
     def title(self, default):
         result = getattr(self.resource, 'title', default)
         if result is not default:
-            result = unicode(result)
+            try:
+                result = unicode(result)
+            except NameError:
+                result = str(result)
         return result
 
     def created(self, default):

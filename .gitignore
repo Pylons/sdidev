@@ -23,3 +23,5 @@ src/slickgrid
 .Python
 *.profile
 npm-debug.log
+src/supervisor
+src/transifex-client

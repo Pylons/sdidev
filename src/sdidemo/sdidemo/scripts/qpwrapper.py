@@ -9,6 +9,9 @@ from repoze.sendmail.queue import (
     )
 from pyramid.paster import get_appsettings
 
+def _print(msg):
+    sys.stdout.write('%s\n' % msg)
+
 class CustomConsoleApp(ConsoleApp):
     def _load_config(self, path=None):
         if path is None:
@@ -46,7 +49,7 @@ def main(argv=sys.argv):
         format='%(asctime)s %(message)s'
         )
     if not '--config' in argv:
-        print "You must pass --config some_config_file.ini"
+        _print("You must pass --config some_config_file.ini")
         sys.exit(2)
     app = CustomConsoleApp(argv)
     app.main()
