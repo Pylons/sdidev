@@ -24,3 +24,5 @@ src/slickgrid
 *.profile
 npm-debug.log
 src/walkabout
+src/supervisor
+src/transifex-client

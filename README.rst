@@ -19,12 +19,14 @@ Download virtualenv from http://pypi.python.org/pypi/virtualenv and install
 it into your system Python (2.7+).  Once you've installed it, create a
 virtualenv like so::
 
-  $ $PYTHONHOME/bin/virtualenv --no-setuptools .
+  $ $PYTHONHOME/bin/virtualenv
 
 Where $PYTHONHOME/bin is where your Python installation installs its scripts.
-This will create a virtualenv within the ``sdidev`` directory. The
---no-setuptools flag is important to make sure that buildout can use its
-preferred version of setuptools instead of whatever your system Python has.
+This will create a virtualenv within the ``sdidev`` directory. You might need
+to make sure that you have the latest version of setuptools for running the
+buildout. Just do this from inside your virtualenv::
+
+  $ bin/easy_install -U setuptools
 
 After you've succesfully done the above, invoke the buildout via::
 
@@ -82,6 +84,15 @@ interactive Python prompt with all the ``substanced`` dependencies available
 for import.
 
 Log files, pid files, and database files are stored in the ``var`` directory.
+
+Installing Sublime codeintel
+----------------------------
+
+The buildout has a section for setting up Sublime codeintel, but it's not 
+enabled by default because the recipe used is not Python 3 compatible. If you
+are using Python 2.7 and want to enable it, just edit the buildout.cfg file
+and add ``codeintel`` to the parts section. This must be done *before* running
+the buildout.
 
 Installing Node and LESS
 ------------------------
