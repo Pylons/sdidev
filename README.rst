@@ -94,22 +94,6 @@ are using Python 2.7 and want to enable it, just edit the buildout.cfg file
 and add ``codeintel`` to the parts section. This must be done *before* running
 the buildout.
 
-Installing Node and LESS
-------------------------
-
-To deal with compiling resources, you need both node.js and the LESS compiler
-installed on your system.  On a Ubuntu Linux machine, these can be installed
-via::
-
-  sudo apt-get install npm
-  sudo npm install -g less
-
-You should wind up with a ``lessc`` executable on the path.  Version 1.3.1
-seems to work to compile things.  Version 1.2.1 seemed to fail with a similar
-error to this one for me https://github.com/cloudhead/less.js/issues/906
-
-You can see the version of less you have by doing ``lessc -v``.
-
 Updating Sources
 ----------------
 
